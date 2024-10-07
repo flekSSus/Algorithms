@@ -1,0 +1,37 @@
+#include <iostream>
+
+long long Comb(int n, int k)
+{
+    if(k==1)
+        return n;
+    int arrSize(1+std::min(k,n-k));
+    long long *arr=new long long [arrSize];
+    
+    for(int i=0;i<arrSize;++i)
+        arr[i]=1;
+    for(int i=1;i<n;++i){
+        int a = 1, b =1;
+        for(int j=1;j<=i;++j)
+        {
+            b = arr[j];
+            arr[j]+=a;
+            arr[j] %= 1000000007;
+            a = b; 
+           // std:: cout << arr[j] << " ";
+        }
+        //std::cout << std::endl;
+        
+    }
+    int result=arr[arrSize-1];
+    delete []arr;
+    return result;
+}
+
+int main()
+{
+    int n(0);
+    int k(0);
+    std::cin>>n>>k;
+    std::cout<<Comb(n,k);
+
+}
